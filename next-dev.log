@@ -1,0 +1,128 @@
+
+> guruva-next-site@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3001
+
+  ▲ Next.js 14.2.35
+  - Local:        http://127.0.0.1:3001
+  - Network:      http://127.0.0.1:3001
+
+ ✓ Starting...
+ ✓ Ready in 3s
+ ○ Compiling / ...
+ ✓ Compiled / in 4.4s (545 modules)
+ GET / 200 in 4626ms
+ GET / 200 in 50ms
+ ✓ Compiled in 616ms (536 modules)
+ GET / 200 in 97ms
+ ✓ Compiled in 608ms (536 modules)
+ GET / 200 in 98ms
+ GET / 200 in 72ms
+ ✓ Compiled in 566ms (536 modules)
+ ✓ Compiled /_not-found in 257ms (524 modules)
+ GET /_next/static/webpack/2346141365db6701.webpack.hot-update.json 404 in 411ms
+ GET / 200 in 68ms
+ GET / 200 in 72ms
+ GET / 200 in 59ms
+ ✓ Compiled in 902ms (536 modules)
+ ✓ Compiled /_not-found in 225ms (524 modules)
+ GET /_next/static/webpack/38f7a899843ae5be.webpack.hot-update.json 404 in 305ms
+ GET / 200 in 78ms
+ ✓ Compiled in 405ms (539 modules)
+ GET / 200 in 48ms
+ ✓ Compiled in 691ms (536 modules)
+ ✓ Compiled in 529ms (536 modules)
+ GET / 200 in 101ms
+ GET / 200 in 64ms
+ ✓ Compiled in 486ms (536 modules)
+ ✓ Compiled in 431ms (536 modules)
+ GET / 200 in 90ms
+ ✓ Compiled in 610ms (536 modules)
+ ✓ Compiled in 534ms (536 modules)
+ ✓ Compiled in 514ms (536 modules)
+ GET / 200 in 83ms
+ ✓ Compiled in 679ms (536 modules)
+ GET / 200 in 83ms
+ GET / 200 in 41ms
+ ✓ Compiled in 493ms (536 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 700ms (524 modules)
+ GET /_next/static/webpack/b74771488205a7e1.webpack.hot-update.json 404 in 893ms
+ GET / 200 in 40ms
+ ✓ Compiled in 455ms (539 modules)
+ ✓ Compiled in 469ms (536 modules)
+ GET / 200 in 95ms
+ GET / 200 in 72ms
+ ✓ Compiled in 553ms (536 modules)
+ GET / 200 in 48ms
+ ✓ Compiled in 527ms (536 modules)
+ GET / 200 in 47ms
+ GET / 200 in 50ms
+ ✓ Compiled /_not-found in 780ms (524 modules)
+ GET /_next/static/webpack/d684cba770d96e41.webpack.hot-update.json 404 in 449ms
+ GET / 200 in 38ms
+ GET / 200 in 84ms
+ GET / 200 in 90ms
+ ✓ Compiled /_not-found in 850ms (524 modules)
+ GET /_next/static/webpack/adfcadf022819cbb.webpack.hot-update.json 404 in 404ms
+ GET / 200 in 42ms
+ ✓ Compiled in 529ms (539 modules)
+ ✓ Compiled in 341ms (536 modules)
+ GET / 200 in 57ms
+ ✓ Compiled in 458ms (536 modules)
+ ✓ Compiled in 517ms (536 modules)
+ ✓ Compiled in 894ms (536 modules)
+ ✓ Compiled in 575ms (536 modules)
+ GET / 200 in 97ms
+ ✓ Compiled in 497ms (536 modules)
+ ✓ Compiled in 533ms (536 modules)
+ ✓ Compiled in 686ms (536 modules)
+ GET / 200 in 100ms
+ GET / 200 in 51ms
+ ✓ Compiled /_not-found in 788ms (524 modules)
+ GET /_next/static/webpack/52c866eaa84b78ac.webpack.hot-update.json 404 in 526ms
+ GET / 200 in 103ms
+ GET / 200 in 64ms
+ ✓ Compiled in 655ms (536 modules)
+ ✓ Compiled /_not-found in 243ms (524 modules)
+ GET /_next/static/webpack/e5add4e50501b778.webpack.hot-update.json 404 in 370ms
+ GET / 200 in 44ms
+ GET / 200 in 62ms
+ GET / 200 in 67ms
+ ✓ Compiled in 793ms (536 modules)
+ ✓ Compiled /_not-found in 246ms (524 modules)
+ GET /_next/static/webpack/4d75e8a6e238b4f5.webpack.hot-update.json 404 in 497ms
+ GET /_next/static/webpack/4d75e8a6e238b4f5.webpack.hot-update.json 404 in 435ms
+ GET / 200 in 111ms
+ GET / 200 in 55ms
+ ✓ Compiled in 680ms (539 modules)
+ GET / 200 in 83ms
+ GET / 200 in 69ms
+ ✓ Compiled in 500ms (536 modules)
+ ✓ Compiled in 499ms (536 modules)
+ GET / 200 in 90ms
+ ✓ Compiled /_not-found in 797ms (524 modules)
+ GET /_next/static/webpack/9892770b12983638.webpack.hot-update.json 404 in 514ms
+ GET / 200 in 43ms
+ GET / 200 in 63ms
+ ✓ Compiled in 557ms (536 modules)
+ ✓ Compiled in 718ms (536 modules)
+ ✓ Compiled in 487ms (536 modules)
+ GET / 200 in 120ms
+ ✓ Compiled in 350ms (536 modules)
+ GET / 200 in 117ms
+ ✓ Compiled in 482ms (536 modules)
+ GET / 200 in 66ms
+ ✓ Compiled in 495ms (536 modules)
+ GET / 200 in 52ms
+ ✓ Compiled in 617ms (536 modules)
+ GET / 200 in 86ms
+ GET / 200 in 48ms
+ ✓ Compiled in 543ms (536 modules)
+ GET / 200 in 118ms
+ ✓ Compiled in 614ms (536 modules)
+ ✓ Compiled /_not-found in 292ms (524 modules)
+ GET /_next/static/webpack/823759eef43fb40c.webpack.hot-update.json 404 in 368ms
+ GET / 200 in 67ms
+ ✓ Compiled in 681ms (539 modules)
+ GET / 200 in 111ms
+[?25h

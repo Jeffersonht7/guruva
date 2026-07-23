@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1050" fill="none">
+  <rect width="1800" height="1050" fill="white"/>
+  <defs>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7fc14b"/>
+      <stop offset=".58" stop-color="#3f8e2f"/>
+      <stop offset="1" stop-color="#0f5d31"/>
+    </linearGradient>
+    <linearGradient id="leaf2" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#b6db70"/>
+      <stop offset=".5" stop-color="#5ea23a"/>
+      <stop offset="1" stop-color="#1d6a35"/>
+    </linearGradient>
+  </defs>
+
+  <g opacity=".92">
+    <g transform="translate(70 72) rotate(-24) scale(1.14)">
+      <path d="M98 2 129 70 201 39 166 110 238 132 158 151 191 226 119 180 77 252 69 166 0 185 51 127 5 67 75 82 98 2Z" fill="url(#leaf)"/>
+      <path d="M91 83 C93 135 100 178 115 226" stroke="#e7f5ce" stroke-width="3" opacity=".55"/>
+      <path d="M91 100 33 78M94 116 169 60M97 137 12 176M104 147 220 134M109 164 170 219" stroke="#e7f5ce" stroke-width="2" opacity=".45"/>
+    </g>
+    <g transform="translate(50 515) rotate(68) scale(.96)">
+      <path d="M98 2 129 70 201 39 166 110 238 132 158 151 191 226 119 180 77 252 69 166 0 185 51 127 5 67 75 82 98 2Z" fill="url(#leaf2)"/>
+      <path d="M91 83 C93 135 100 178 115 226" stroke="#e7f5ce" stroke-width="3" opacity=".55"/>
+      <path d="M91 100 33 78M94 116 169 60M97 137 12 176M104 147 220 134M109 164 170 219" stroke="#e7f5ce" stroke-width="2" opacity=".45"/>
+    </g>
+    <g transform="translate(-12 855) rotate(-14) scale(1.05)">
+      <path d="M98 2 129 70 201 39 166 110 238 132 158 151 191 226 119 180 77 252 69 166 0 185 51 127 5 67 75 82 98 2Z" fill="url(#leaf)"/>
+      <path d="M91 83 C93 135 100 178 115 226" stroke="#e7f5ce" stroke-width="3" opacity=".55"/>
+      <path d="M91 100 33 78M94 116 169 60M97 137 12 176M104 147 220 134M109 164 170 219" stroke="#e7f5ce" stroke-width="2" opacity=".45"/>
+    </g>
+  </g>
+
+  <g opacity=".9">
+    <g transform="translate(1608 178) rotate(220) scale(.98)">
+      <path d="M98 2 129 70 201 39 166 110 238 132 158 151 191 226 119 180 77 252 69 166 0 185 51 127 5 67 75 82 98 2Z" fill="url(#leaf2)"/>
+      <path d="M91 83 C93 135 100 178 115 226" stroke="#e7f5ce" stroke-width="3" opacity=".55"/>
+      <path d="M91 100 33 78M94 116 169 60M97 137 12 176M104 147 220 134M109 164 170 219" stroke="#e7f5ce" stroke-width="2" opacity=".45"/>
+    </g>
+    <g transform="translate(1628 670) rotate(192) scale(.78)" filter="url(#soft)" opacity=".75">
+      <path d="M98 2 129 70 201 39 166 110 238 132 158 151 191 226 119 180 77 252 69 166 0 185 51 127 5 67 75 82 98 2Z" fill="url(#leaf)"/>
+    </g>
+    <g transform="translate(1705 868) rotate(244) scale(.82)">
+      <path d="M98 2 129 70 201 39 166 110 238 132 158 151 191 226 119 180 77 252 69 166 0 185 51 127 5 67 75 82 98 2Z" fill="url(#leaf)"/>
+      <path d="M91 83 C93 135 100 178 115 226" stroke="#e7f5ce" stroke-width="3" opacity=".55"/>
+      <path d="M91 100 33 78M94 116 169 60M97 137 12 176M104 147 220 134M109 164 170 219" stroke="#e7f5ce" stroke-width="2" opacity=".45"/>
+    </g>
+  </g>
+
+  <circle cx="1680" cy="520" r="38" fill="#77ad38" filter="url(#soft)" opacity=".42"/>
+  <circle cx="82" cy="430" r="34" fill="#77ad38" filter="url(#soft)" opacity=".42"/>
+  <circle cx="1730" cy="740" r="42" fill="#7eb543" filter="url(#soft)" opacity=".34"/>
+</svg>

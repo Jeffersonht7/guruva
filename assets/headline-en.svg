@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 300" role="img" aria-label="From the São Francisco Valley to the world.">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Meddon&amp;display=swap");
+
+      .serif {
+        fill: #fff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 46px;
+        font-weight: 700;
+      }
+
+      .script {
+        fill: #8fc227;
+        font-family: "Meddon", "Segoe Script", "Brush Script MT", cursive;
+        font-size: 104px;
+        font-weight: 400;
+        letter-spacing: -5px;
+      }
+    </style>
+    <filter id="shadow" x="-12%" y="-30%" width="124%" height="165%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#120c07" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <text class="serif" x="154" y="66">From the</text>
+    <text class="script" x="24" y="176">São Francisco Valley</text>
+    <text class="serif" x="690" y="228">to the world.</text>
+  </g>
+</svg>

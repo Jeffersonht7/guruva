@@ -1,0 +1,79 @@
+ ⨯ ./components/GuruvaLanding.tsx
+Error: 
+  [31mx[0m Expression expected
+     ,-[[36;1;4mC:\Users\User client\Documents\Criador de sites\components\GuruvaLanding.tsx[0m:296:1]
+ [2m296[0m |   useGuruvaInteractions();
+ [2m297[0m | 
+ [2m298[0m |   return (
+ [2m299[0m |     <>
+     : [31;1m     ^[0m
+ [2m300[0m |       <div className="leaf-field">
+ [2m301[0m |       <div dangerouslySetInnerHTML={{ __html: restructuredBeforeMapMarkup }} />
+ [2m302[0m |       <BusinessUnitsMap
+     `----
+
+  [31mx[0m Expected corresponding JSX closing tag for <div>
+     ,-[[36;1;4mC:\Users\User client\Documents\Criador de sites\components\GuruvaLanding.tsx[0m:306:1]
+ [2m306[0m |         title="Onde a operação se conecta."
+ [2m307[0m |       />
+ [2m308[0m |       <div dangerouslySetInnerHTML={{ __html: restructuredAfterMapMarkup }} />
+ [2m309[0m |     </>
+     : [31;1m    ^^^[0m
+ [2m310[0m |   );
+ [2m311[0m | }
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./components/GuruvaLanding.tsx
+ ⨯ ./components/GuruvaLanding.tsx
+Error: Failed to read source code from C:\Users\User client\Documents\Criador de sites\components\GuruvaLanding.tsx
+
+Caused by:
+    O sistema não pode encontrar o arquivo especificado. (os error 2)
+
+Import trace for requested module:
+./components/GuruvaLanding.tsx
+ ⨯ ./components/GuruvaLanding.tsx
+Error: Failed to read source code from C:\Users\User client\Documents\Criador de sites\components\GuruvaLanding.tsx
+
+Caused by:
+    O sistema não pode encontrar o arquivo especificado. (os error 2)
+
+Import trace for requested module:
+./components/GuruvaLanding.tsx
+ ⨯ ./components/GuruvaLanding.tsx
+Error: Failed to read source code from C:\Users\User client\Documents\Criador de sites\components\GuruvaLanding.tsx
+
+Caused by:
+    O sistema não pode encontrar o arquivo especificado. (os error 2)
+
+Import trace for requested module:
+./components/GuruvaLanding.tsx
+ ⨯ ./components/GuruvaLanding.tsx
+Error: Failed to read source code from C:\Users\User client\Documents\Criador de sites\components\GuruvaLanding.tsx
+
+Caused by:
+    O sistema não pode encontrar o arquivo especificado. (os error 2)
+
+Import trace for requested module:
+./components/GuruvaLanding.tsx
+ ⨯ ./components/GuruvaLanding.tsx
+Error: Failed to read source code from C:\Users\User client\Documents\Criador de sites\components\GuruvaLanding.tsx
+
+Caused by:
+    O sistema não pode encontrar o arquivo especificado. (os error 2)
+
+Import trace for requested module:
+./components/GuruvaLanding.tsx
+ ⨯ ./next-map-components/BusinessUnitsMap.tsx
+Error: Failed to read source code from C:\Users\User client\Documents\Criador de sites\next-map-components\BusinessUnitsMap.tsx
+
+Caused by:
+    O sistema não pode encontrar o arquivo especificado. (os error 2)
+
+Import trace for requested module:
+./next-map-components/BusinessUnitsMap.tsx
+./components/GuruvaLanding.tsx

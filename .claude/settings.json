@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(timeout 40 bash -c 'until curl -sf http://127.0.0.1:3001 >/dev/null; do sleep 1; done')",
+      "Read(//tmp/**)",
+      "Bash(export NODE_PATH=\"C:\\\\Users\\\\User client\\\\AppData\\\\Local\\\\npm-cache\\\\_npx\\\\e41f203b7505f1fb\\\\node_modules\")",
+      "Bash(NODE_PATH='C:\\\\Users\\\\User client\\\\AppData\\\\Local\\\\npm-cache\\\\_npx\\\\e41f203b7505f1fb\\\\node_modules' node 'C:\\\\Users\\\\User client\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-User-client-Documents-Criador-de-sites\\\\4389b47b-253d-4c76-9b05-c7edfbe47a7d\\\\scratchpad\\\\verify.js')"
+    ]
+  }
+}

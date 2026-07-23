@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 90" width="280" height="90">
+  <text x="0" y="66" font-family="Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="900" font-size="70" fill="#3d3d3d" letter-spacing="-1.5">SMETA</text>
+  <circle cx="230" cy="22" r="18" fill="#58595b" />
+  <circle cx="258" cy="38" r="16" fill="#e30652" />
+  <circle cx="242" cy="54" r="12" fill="#939598" />
+  <text x="254" y="74" font-family="Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="bold" font-size="10" fill="#3d3d3d">®</text>
+</svg>

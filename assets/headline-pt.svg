@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 300" role="img" aria-label="Do Vale do São Francisco Para o mundo.">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Meddon&amp;display=swap");
+
+      .serif {
+        fill: #fff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 46px;
+        font-weight: 700;
+      }
+
+      .script {
+        fill: #8fc227;
+        font-family: "Meddon", "Segoe Script", "Brush Script MT", cursive;
+        font-size: 104px;
+        font-weight: 400;
+        letter-spacing: -5px;
+      }
+    </style>
+    <filter id="shadow" x="-12%" y="-30%" width="124%" height="165%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#120c07" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <text class="serif" x="154" y="66">Do Vale</text>
+    <text class="script" x="44" y="176">do São Francisco</text>
+    <text class="serif" x="690" y="228">Para o mundo.</text>
+  </g>
+</svg>
