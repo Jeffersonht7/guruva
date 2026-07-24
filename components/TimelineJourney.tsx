@@ -71,6 +71,10 @@ export function TimelineJourney({ items }: TimelineJourneyProps) {
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     const track = trackRef.current;
     if (!track || !isDragging.current) return;
+    // Without this, any vertical drift in the touch gesture (common when the
+    // finger follows the zigzag node layout) lets the browser reinterpret the
+    // drag as a native vertical page scroll and cancel it mid-swipe.
+    event.preventDefault();
     const delta = event.clientX - dragStartX.current;
     track.scrollLeft = scrollStart.current - delta;
   };

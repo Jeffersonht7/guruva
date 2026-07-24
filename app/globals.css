@@ -540,6 +540,7 @@ h2 {
   background:
     linear-gradient(90deg, rgba(18, 12, 7, 0.82), rgba(18, 12, 7, 0.38) 48%, rgba(18, 12, 7, 0.12)),
     linear-gradient(to top, rgba(18, 12, 7, 0.84), transparent 48%);
+  pointer-events: none;
 }
 
 .hero-content {
@@ -557,6 +558,7 @@ h2 {
   margin: 0;
   text-align: center;
   transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .hero-title {
@@ -2617,9 +2619,11 @@ h2 {
   width: min(980px, calc(100vw - 48px));
   min-height: auto;
   max-height: calc(100vh - 24px);
+  max-height: calc(100dvh - 24px);
   padding: 58px 22px 24px;
   overflow: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   background:
@@ -2678,10 +2682,10 @@ h2 {
 
 .commercial-dialog h2 {
   max-width: 320px;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   color: #fffaf0;
-  font-size: clamp(2.6rem, 15vw, 4.4rem);
-  line-height: 0.94;
+  font-size: clamp(2rem, 10vw, 2.8rem);
+  line-height: 1.02;
   letter-spacing: 0;
 }
 
@@ -2792,6 +2796,7 @@ h2 {
     max-width: 430px;
     margin-bottom: 22px;
     font-size: clamp(3rem, 5.4vw, 5.2rem);
+    line-height: 0.94;
   }
 
   .commercial-modal-copy p {

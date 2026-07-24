@@ -46,7 +46,13 @@ export function useGuruvaInteractions() {
     };
 
     const getCollapsedHeroHeight = () => {
-      if (window.matchMedia("(max-width: 640px)").matches) return 660;
+      if (window.matchMedia("(max-width: 640px)").matches) {
+        // Proportional to innerHeight (not a fixed px value): on many phones the
+        // initial innerHeight (address bar visible) is already below a fixed
+        // 660px, which collapsed the shrink range to zero and made the
+        // animation appear broken on mobile.
+        return Math.min(Math.max(window.innerHeight * 0.78, 420), 620);
+      }
       return Math.min(Math.max(window.innerHeight * 0.71, 560), 680);
     };
 
@@ -140,6 +146,19 @@ export function useGuruvaInteractions() {
         startHeroIntro(1400);
       }
     };
+    // Some mobile browsers ignore the `muted`/`autoPlay` JSX attributes on first
+    // paint and silently block playback, leaving a black frame with an inert
+    // native play affordance. Force the property (not just the attribute) and
+    // retry on the user's first tap if the initial play() is rejected.
+    const retryHeroVideoPlay = () => {
+      heroVideo?.play().catch(() => {});
+    };
+    if (heroVideo) {
+      heroVideo.muted = true;
+      retryHeroVideoPlay();
+      hero?.addEventListener("touchstart", retryHeroVideoPlay, { once: true, passive: true });
+      hero?.addEventListener("click", retryHeroVideoPlay, { once: true });
+    }
     const openCommercialModal = (event?: Event) => {
       event?.preventDefault();
       if (!commercialModal) return;
@@ -268,6 +287,8 @@ export function useGuruvaInteractions() {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("resize", onResize);
       heroVideo?.removeEventListener("timeupdate", onVideoTimeUpdate);
+      hero?.removeEventListener("touchstart", retryHeroVideoPlay);
+      hero?.removeEventListener("click", retryHeroVideoPlay);
       commercialOpenButtons.forEach((button) => button.removeEventListener("click", openCommercialModal));
       commercialCloseButtons.forEach((button) => button.removeEventListener("click", closeCommercialModal));
       commercialForm?.removeEventListener("submit", onCommercialSubmit);

@@ -77,7 +77,10 @@ export default function FazendasPage() {
   return (
     <GuruvaPageShell>
       <section className="subpage-hero farms-hero">
-        <div className="farms-hero-banner" style={{ backgroundImage: "url('/assets/screen.png')" }}>
+        <div
+          className="farms-hero-banner"
+          style={{ backgroundImage: "url('/assets/fazenda-de-mangas-vale-do-sao-francisco-1-1290x724.webp')" }}
+        >
           <div className="farms-hero-copy">
             <span className="section-kicker">Nossas fazendas</span>
             <h1>

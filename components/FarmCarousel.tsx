@@ -32,6 +32,13 @@ export function FarmCarousel({ farms, kicker, title, variant = "cine" }: FarmCar
   const [isGridLayout, setIsGridLayout] = useState(false);
   const isSimpleGrid = variant === "simple" && isGridLayout;
   const isMobileVertical = variant === "simple" && !isGridLayout;
+  // Each "cine" slide only takes up part of the viewport width, leaving a
+  // peek of the next slide visible. Without a trailing clone, the last real
+  // slide has no "next" to peek at and leaves blank space beside it.
+  const loopSlides =
+    count > 1
+      ? [...farms.map((farm) => ({ farm, isClone: false })), { farm: farms[0], isClone: true }]
+      : farms.map((farm) => ({ farm, isClone: false }));
 
   const viewportRef = useRef<HTMLDivElement>(null);
   const autoplayRef = useRef<number | null>(null);
@@ -282,10 +289,14 @@ export function FarmCarousel({ farms, kicker, title, variant = "cine" }: FarmCar
               onPointerUp={endDrag}
               onPointerCancel={endDrag}
             >
-              {farms.map((farm, index) => {
+              {loopSlides.map(({ farm, isClone }, index) => {
                 const bgSrc = farm.photo || farm.image || farm.logo || `/assets/farm-${farm.slug}.png`;
                 return (
-                  <article className="farm-slide" key={farm.slug}>
+                  <article
+                    className="farm-slide"
+                    key={isClone ? `${farm.slug}-loop-clone` : farm.slug}
+                    aria-hidden={isClone || undefined}
+                  >
                     <div className={`farm-cine-card${index === activeIndex ? " is-active" : " is-inactive"}`}>
                       <div className="farm-cine-bg" style={{ backgroundImage: `url('${bgSrc}')` }} />
                       <div className="farm-cine-gradient" aria-hidden="true" />
@@ -293,7 +304,7 @@ export function FarmCarousel({ farms, kicker, title, variant = "cine" }: FarmCar
                         <span className="farm-cine-kicker">Desde {farm.year}</span>
                         <h3>{farm.name}</h3>
                         <p>{farm.summary}</p>
-                        <a className="farm-cine-cta" href={`/fazendas/${farm.slug}`}>
+                        <a className="farm-cine-cta" href={`/fazendas/${farm.slug}`} tabIndex={isClone ? -1 : undefined}>
                           Explorar unidade
                         </a>
                       </div>
