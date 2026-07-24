@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { useGuruvaInteractions } from "./useGuruvaInteractions";
+import { farms, jobOpenings } from "./guruvaData";
 
 interface SiteHeaderProps {
   initiallyScrolled?: boolean;
@@ -32,23 +33,32 @@ export function SiteHeader({ initiallyScrolled = true }: SiteHeaderProps) {
 
   const navLinks = (
     <>
+      <a href="/" onClick={closeMenu}>
+        Início
+      </a>
       <a href="/quem-somos" onClick={closeMenu}>
         Quem Somos
       </a>
-      <a href="/fazendas" onClick={closeMenu}>
-        Fazendas
-      </a>
+      <div className="nav-item-dropdown">
+        <a href="/fazendas" onClick={closeMenu}>
+          Fazendas
+        </a>
+        <div className="nav-dropdown-menu">
+          {farms.map((farm) => (
+            <a key={farm.slug} href={`/fazendas/${farm.slug}`} onClick={closeMenu}>
+              {farm.shortName}
+            </a>
+          ))}
+        </div>
+      </div>
       <a href="/uvas" onClick={closeMenu}>
         Uvas
-      </a>
-      <a href="/sustentabilidade-certificacoes" onClick={closeMenu}>
-        Certificações
       </a>
       <a href="/parceiros-mercados" onClick={closeMenu}>
         Mercados
       </a>
-      <a href="#contato" data-commercial-open onClick={closeMenu}>
-        Contato
+      <a href="#trabalhe-conosco" data-careers-open onClick={closeMenu}>
+        Trabalhe Conosco
       </a>
     </>
   );
@@ -64,7 +74,7 @@ export function SiteHeader({ initiallyScrolled = true }: SiteHeaderProps) {
         </nav>
         <div className="header-actions">
           <a className="header-cta" href="#contato" data-commercial-open>
-            Comercial
+            Contato
           </a>
           <button
             type="button"
@@ -146,11 +156,121 @@ export function CommercialModal() {
   );
 }
 
+export function CareersModal() {
+  return (
+    <div className="commercial-modal" data-careers-modal aria-hidden="true">
+      <div className="commercial-modal-backdrop" data-careers-close></div>
+      <div className="commercial-dialog" role="dialog" aria-modal="true" aria-labelledby="careers-modal-title">
+        <button className="commercial-close" type="button" data-careers-close aria-label="Fechar">
+          ×
+        </button>
+        <div className="commercial-modal-copy">
+          <span className="section-kicker">Trabalhe conosco</span>
+          <h2 id="careers-modal-title">Vem fazer parte do time Guruva.</h2>
+          <p>Envie seus dados e currículo — nosso time de gente e gestão entra em contato quando surgir a vaga certa para você.</p>
+        </div>
+        <form className="commercial-modal-form careers-form">
+          <label>
+            Nome completo
+            <input type="text" name="name" autoComplete="name" placeholder="Seu nome completo" required />
+          </label>
+          <label>
+            Telefone
+            <input type="tel" name="phone" autoComplete="tel" placeholder="(00) 00000-0000" required />
+          </label>
+          <label>
+            E-mail
+            <input type="email" name="email" autoComplete="email" placeholder="seu@email.com" required />
+          </label>
+          <label>
+            Vaga de interesse
+            <select name="position" defaultValue="" required>
+              <option value="" disabled>
+                Selecione uma vaga
+              </option>
+              {jobOpenings.map((job) => (
+                <option key={job} value={job}>
+                  {job}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Currículo (PDF ou Word)
+            <input type="file" name="resume" accept=".pdf,.doc,.docx" required />
+          </label>
+          <button type="submit">Enviar candidatura</button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export function SiteFooter() {
   return (
     <footer className="footer">
-      <span>Guruva Group</span>
-      <p>From the São Francisco Valley to the World.</p>
+      <div className="footer-inner">
+        <div className="footer-brand">
+          <span className="footer-logo">Guruva</span>
+          <p>Exportando a doçura do sol e a riqueza da terra brasileira para o mundo, com excelência em cada cacho.</p>
+          <div className="footer-social">
+            <a href="/" aria-label="Site Guruva">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z" />
+              </svg>
+            </a>
+            <a href="mailto:grupoguruva@guruva.com.br" aria-label="E-mail Guruva">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m4 7 8 6 8-6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div className="footer-links">
+          <div>
+            <h5 className="section-kicker">Institucional</h5>
+            <ul>
+              <li>
+                <a href="/quem-somos">Quem Somos</a>
+              </li>
+              <li>
+                <a href="/fazendas">Fazendas</a>
+              </li>
+              <li>
+                <a href="/uvas">Uvas</a>
+              </li>
+              <li>
+                <a href="/sustentabilidade-certificacoes">Certificações</a>
+              </li>
+              <li>
+                <a href="/parceiros-mercados">Mercados</a>
+              </li>
+              <li>
+                <a href="/contato">Contato</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="section-kicker">Escritório</h5>
+            <p>
+              Petrolina, Pernambuco
+              <br />
+              Vale do São Francisco, Brasil
+              <br />
+              grupoguruva@guruva.com.br
+              <br />
+              +55 (87) 3032-8525
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} Guruva Group. Do Vale do São Francisco para o mundo.</p>
+      </div>
     </footer>
   );
 }
@@ -163,6 +283,7 @@ export function GuruvaPageShell({ children }: { children: ReactNode }) {
       <SiteHeader />
       <main className="subpage-main">{children}</main>
       <CommercialModal />
+      <CareersModal />
       <SiteFooter />
     </>
   );

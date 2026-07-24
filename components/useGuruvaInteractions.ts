@@ -22,7 +22,12 @@ export function useGuruvaInteractions() {
     const commercialOpenButtons = document.querySelectorAll<HTMLElement>("[data-commercial-open], a[href='#contato']");
     const commercialCloseButtons = document.querySelectorAll<HTMLElement>("[data-commercial-close]");
     const commercialForm = document.querySelector<HTMLFormElement>(".commercial-modal-form");
+    const careersModal = document.querySelector<HTMLElement>("[data-careers-modal]");
+    const careersOpenButtons = document.querySelectorAll<HTMLElement>("[data-careers-open]");
+    const careersCloseButtons = document.querySelectorAll<HTMLElement>("[data-careers-close]");
+    const careersForm = document.querySelector<HTMLFormElement>(".careers-form");
     const metricsStage = document.querySelector<HTMLElement>(".metrics-stage");
+    const parallaxEl = document.querySelector<HTMLElement>("[data-parallax]");
 
     let ticking = false;
     let introStarted = false;
@@ -31,6 +36,12 @@ export function useGuruvaInteractions() {
     let introDuration = 700;
 
     const updateHeader = () => {
+      // Only pages with a collapsing hero (the home page) want the header to
+      // fade in on scroll. Elsewhere the header renders already-visible via
+      // `initiallyScrolled`, and recalculating from scrollY on mount (always
+      // 0 at that point) would strip that class and leave the header
+      // invisible/unclickable until the user scrolls.
+      if (!hero) return;
       header?.classList.toggle("is-scrolled", window.scrollY > 40);
     };
 
@@ -100,7 +111,18 @@ export function useGuruvaInteractions() {
       hero.classList.toggle("has-revealed", introStarted || introComplete);
     };
 
-    const onScroll = () => requestMotionUpdate();
+    const updateParallax = () => {
+      if (!parallaxEl?.parentElement) return;
+      const rect = parallaxEl.parentElement.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const progress = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight + rect.height), 0), 1);
+      parallaxEl.style.transform = `scale(1.12) translateY(${((progress - 0.5) * 40).toFixed(1)}px)`;
+    };
+
+    const onScroll = () => {
+      requestMotionUpdate();
+      updateParallax();
+    };
     const onWheel = () => startHeroIntro(520);
     const onTouchMove = () => startHeroIntro(520);
     const onKeyDown = (event: KeyboardEvent) => {
@@ -108,7 +130,10 @@ export function useGuruvaInteractions() {
         startHeroIntro(520);
       }
     };
-    const onResize = () => requestMotionUpdate();
+    const onResize = () => {
+      requestMotionUpdate();
+      updateParallax();
+    };
     const onVideoTimeUpdate = () => {
       if (!heroVideo?.duration || introStarted || introComplete) return;
       if (heroVideo.duration - heroVideo.currentTime <= 3) {
@@ -145,9 +170,40 @@ export function useGuruvaInteractions() {
         closeCommercialModal();
       }, 1800);
     };
+    const openCareersModal = (event?: Event) => {
+      event?.preventDefault();
+      if (!careersModal) return;
+      careersModal.classList.add("is-open");
+      careersModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      careersModal.querySelector<HTMLInputElement>("input")?.focus();
+    };
+    const closeCareersModal = () => {
+      if (!careersModal) return;
+      careersModal.classList.remove("is-open");
+      careersModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+    const onCareersSubmit = (event: SubmitEvent) => {
+      event.preventDefault();
+      const button = careersForm?.querySelector<HTMLButtonElement>("button");
+      if (!button || !careersForm) return;
+      const originalText = button.textContent || "";
+
+      button.textContent = "Candidatura enviada";
+      button.disabled = true;
+
+      window.setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+        careersForm.reset();
+        closeCareersModal();
+      }, 1800);
+    };
     const onEscapeModal = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closeCommercialModal();
+        closeCareersModal();
       }
     };
 
@@ -167,6 +223,23 @@ export function useGuruvaInteractions() {
       metricsObserver.observe(metricsStage);
     }
 
+    const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    let revealObserver: IntersectionObserver | undefined;
+    if (revealTargets.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-revealed");
+              revealObserver?.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+      );
+      revealTargets.forEach((target) => revealObserver?.observe(target));
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("wheel", onWheel, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
@@ -176,13 +249,18 @@ export function useGuruvaInteractions() {
     commercialOpenButtons.forEach((button) => button.addEventListener("click", openCommercialModal));
     commercialCloseButtons.forEach((button) => button.addEventListener("click", closeCommercialModal));
     commercialForm?.addEventListener("submit", onCommercialSubmit);
+    careersOpenButtons.forEach((button) => button.addEventListener("click", openCareersModal));
+    careersCloseButtons.forEach((button) => button.addEventListener("click", closeCareersModal));
+    careersForm?.addEventListener("submit", onCareersSubmit);
     window.addEventListener("keydown", onEscapeModal);
 
     updateHeader();
     updateHeroMotion();
+    updateParallax();
 
     return () => {
       metricsObserver?.disconnect();
+      revealObserver?.disconnect();
       window.history.scrollRestoration = previousScrollRestoration;
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("wheel", onWheel);
@@ -193,6 +271,9 @@ export function useGuruvaInteractions() {
       commercialOpenButtons.forEach((button) => button.removeEventListener("click", openCommercialModal));
       commercialCloseButtons.forEach((button) => button.removeEventListener("click", closeCommercialModal));
       commercialForm?.removeEventListener("submit", onCommercialSubmit);
+      careersOpenButtons.forEach((button) => button.removeEventListener("click", openCareersModal));
+      careersCloseButtons.forEach((button) => button.removeEventListener("click", closeCareersModal));
+      careersForm?.removeEventListener("submit", onCareersSubmit);
       window.removeEventListener("keydown", onEscapeModal);
       document.body.style.overflow = "";
     };

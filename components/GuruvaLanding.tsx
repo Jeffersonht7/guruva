@@ -1,11 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { Unidade } from "../next-map-components/BusinessUnitsMap";
 import { FarmCarousel } from "./FarmCarousel";
 import { GrapeCarousel } from "./GrapeCarousel";
-import { CommercialModal, SiteFooter, SiteHeader } from "./GuruvaShell";
-import { farms, grapes, partners } from "./guruvaData";
+import { CareersModal, CommercialModal, SiteFooter, SiteHeader } from "./GuruvaShell";
+import { farms, farmUnits, grapes, partners } from "./guruvaData";
 import { useGuruvaInteractions } from "./useGuruvaInteractions";
 
 const BusinessUnitsMap = dynamic(
@@ -25,49 +24,6 @@ const BusinessUnitsMap = dynamic(
     ),
   },
 );
-
-const unidades: Unidade[] = [
-  {
-    nome: "Guruva",
-    lat: -9.3388923,
-    lng: -40.6211587,
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=-9.3388923,-40.6211587",
-    logoSrc: "/assets/farm-guruva.png",
-    address: "Projeto de Irrigação Senador Nilo Coelho, 291, núcleo 3, zona rural, Petrolina-PE, CEP 56.300-000",
-    description: "Unidade de origem do grupo, conectando cultivo, padrão técnico e gestão da operação.",
-    details: ["Cultivo de uvas premium", "Base operacional Guruva", "Vale do São Francisco"],
-  },
-  {
-    nome: "Ecograpes",
-    lat: -9.361071,
-    lng: -40.647121,
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=-9.361071,-40.647121",
-    logoSrc: "/assets/farm-ecograpes.png",
-    address: "Projeto de Irrigação Senador Nilo Coelho, 210, lote agrícola 120, núcleo 05, zona rural, Petrolina-PE, CEP 56.300-000",
-    description: "Unidade agrícola integrada ao ecossistema, com foco em produção, manejo e consistência de entrega.",
-    details: ["Produção agrícola", "Manejo técnico", "Controle de qualidade"],
-  },
-  {
-    nome: "Nacional Frutas",
-    lat: -9.328677,
-    lng: -40.726624,
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=-9.328677,-40.726624",
-    logoSrc: "/assets/farm-nacional-frutas.png",
-    address: "Projeto de Irrigação Senador Nilo Coelho, núcleo 04, lote agrícola CS19, zona rural, Petrolina-PE, CEP 56.302-970",
-    description: "Unidade voltada ao fortalecimento produtivo e comercial do grupo.",
-    details: ["Núcleo 04", "Capacidade produtiva", "Exportação"],
-  },
-  {
-    nome: "Vinor",
-    lat: -9.387055,
-    lng: -40.734566,
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=-9.387055,-40.734566",
-    logoSrc: "/assets/farm-vinor.png",
-    address: "Projeto de Irrigação Senador Nilo Coelho, núcleo 04, lote agrícola 009A, zona rural, Petrolina-PE, CEP 56.302-970",
-    description: "Unidade agrícola posicionada para ampliar cobertura e fluxo produtivo.",
-    details: ["Agronegócios", "Área rural irrigada", "Fluxo integrado"],
-  },
-];
 
 const metricSlots = [
   { a: ["20+", "Anos de história"], b: ["18+", "Países atendidos"] },
@@ -120,17 +76,12 @@ export function GuruvaLanding() {
 
         <div className="leaf-field">
           <section className="section operation" aria-label="Fazendas do grupo">
-            <div className="section-heading">
-              <div>
-                <span className="section-kicker">As 4 fazendas do grupo</span>
-                <h2>Um grupo, quatro fazendas, um só padrão de qualidade.</h2>
-              </div>
-              <p>
-                Cada fazenda tem sua própria identidade produtiva, mas compartilha o mesmo compromisso: ciência aplicada
-                ao campo e uva de mesa sem sementes com padrão de exportação.
-              </p>
-            </div>
-            <FarmCarousel farms={farms} />
+            <FarmCarousel
+              farms={farms}
+              kicker="As 4 fazendas do grupo"
+              title="Um grupo, quatro fazendas, um só padrão de qualidade."
+              variant="simple"
+            />
           </section>
 
           <div className="map-section-divider-container" aria-hidden="true">
@@ -141,7 +92,7 @@ export function GuruvaLanding() {
         </div>
 
         <div className="map-green-section">
-          <BusinessUnitsMap unidades={unidades} variant="green" title="Onde a operação se conecta." />
+          <BusinessUnitsMap unidades={farmUnits} variant="green" title="Onde a operação se conecta." />
         </div>
 
         <section className="partners-section" aria-label="Parceiros que confiam no Grupo Guruva">
@@ -168,7 +119,7 @@ export function GuruvaLanding() {
             <p>Conheça a história, a tecnologia e a presença internacional das 4 fazendas que formam o Grupo Guruva.</p>
             <div className="group-cta-actions">
               <a className="button primary" href="/quem-somos">
-                Conhecer o Grupo Guruva →
+                Conhecer o Grupo Guruva
               </a>
             </div>
           </div>
@@ -189,7 +140,7 @@ export function GuruvaLanding() {
             <img src="/assets/cert-smeta.svg" alt="SMETA Sedex certificado" />
           </div>
           <a className="certifications-cta" href="/sustentabilidade-certificacoes">
-            Veja todas as certificações →
+            Veja todas as certificações
           </a>
         </section>
 
@@ -214,6 +165,7 @@ export function GuruvaLanding() {
       </main>
 
       <CommercialModal />
+      <CareersModal />
       <SiteFooter />
     </>
   );

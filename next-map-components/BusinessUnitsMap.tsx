@@ -44,7 +44,10 @@ interface BusinessUnitsMapProps {
   unidades?: Unidade[];
   title?: string;
   eyebrow?: string;
+  description?: string;
   variant?: "dark" | "leaf" | "green";
+  layout?: "stacked" | "split";
+  sideItems?: string[];
 }
 
 const LIGHT_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
@@ -71,7 +74,10 @@ export function BusinessUnitsMap({
   unidades = DEFAULT_UNIDADES,
   eyebrow = "05 - Localização",
   title = "Onde a operação se conecta.",
+  description,
   variant = "dark",
+  layout = "stacked",
+  sideItems,
 }: BusinessUnitsMapProps) {
   const mapRef = useRef<MapRef | null>(null);
   const mapUnits = unidades.length > 0 ? unidades : DEFAULT_UNIDADES;
@@ -178,31 +184,13 @@ export function BusinessUnitsMap({
     }
   };
 
-  return (
-    <section
-      className={
-        isGreen
-          ? "bg-[#82aa3c] px-4 py-16 text-white sm:px-6 lg:px-8"
-          : isLeaf
-            ? "leaf-map-section px-4 py-20 text-[#173f2c] sm:px-6 lg:px-8"
-            : "bg-[#0B0B0B] px-4 py-20 text-amber-50 sm:px-6 lg:px-8"
-      }
-    >
-      <div className="mx-auto max-w-6xl">
-        <p className={isGreen ? "mb-5 text-xs font-bold uppercase tracking-[0.36em] text-white/90" : "mb-5 text-xs font-bold uppercase tracking-[0.36em] text-amber-400"}>{displayedEyebrow}</p>
-        <h2
-          className={
-            isGreen
-              ? "mb-10 max-w-3xl font-serif text-4xl leading-none text-white sm:text-6xl"
-              : isLeaf
-                ? "mb-10 max-w-3xl font-serif text-4xl leading-none text-[#17120e] sm:text-6xl"
-                : "mb-10 max-w-3xl font-serif text-4xl leading-none text-amber-50 sm:text-6xl"
-          }
-        >
-          {titleWords.join(" ")} <em className={isGreen ? "font-normal text-[#24180f]" : "font-normal text-amber-400"}>{titleLastWord}</em>
-        </h2>
+  const mapCardClassName =
+    layout === "split"
+      ? "relative aspect-[4/3] overflow-hidden rounded-3xl border border-[#d9c999]/30 bg-[#f5f0e4] shadow-2xl sm:aspect-video"
+      : "relative h-[360px] overflow-hidden rounded-2xl border border-[#d9c999]/45 bg-[#f5f0e4] shadow-[0_30px_90px_rgba(23,18,10,0.35)] sm:h-[440px] lg:h-[520px]";
 
-        <div className="relative h-[360px] overflow-hidden rounded-2xl border border-[#d9c999]/45 bg-[#f5f0e4] shadow-[0_30px_90px_rgba(23,18,10,0.35)] sm:h-[440px] lg:h-[520px]">
+  const mapStage = (
+    <div className={mapCardClassName}>
           {!mapError ? (
             <Map
               ref={mapRef}
@@ -324,7 +312,7 @@ export function BusinessUnitsMap({
                   >
                     <strong className="text-amber-300">{unit.nome}</strong>
                     <span className="text-xs text-white/80">{unit.description || "Unidade Agrícola"}</span>
-                    <span className="mt-2 text-[10px] uppercase tracking-wider text-amber-400">Ver no Google Maps →</span>
+                    <span className="mt-2 text-[10px] uppercase tracking-wider text-amber-400">Ver no Google Maps</span>
                   </a>
                 ))}
               </div>
@@ -360,7 +348,66 @@ export function BusinessUnitsMap({
           >
             i
           </button>
-        </div>
+    </div>
+  );
+
+  return (
+    <section
+      className={
+        isGreen
+          ? "bg-[#82aa3c] px-4 py-16 text-white sm:px-6 lg:px-8"
+          : isLeaf
+            ? "leaf-map-section px-4 py-20 text-[#173f2c] sm:px-6 lg:px-8"
+            : "bg-[#1c130c] px-4 py-20 text-amber-50 sm:px-6 lg:px-8"
+      }
+    >
+      <div className="mx-auto max-w-6xl">
+        {layout === "split" ? (
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+            <div className="lg:col-span-4">
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.32em] text-amber-400">{displayedEyebrow}</p>
+              <h2 className="max-w-md font-serif text-4xl font-normal leading-[1.05] text-amber-50 sm:text-5xl">{title}</h2>
+              {description ? <p className="mt-6 max-w-md text-sm leading-relaxed text-amber-50/70">{description}</p> : null}
+              {sideItems?.length ? (
+                <ul className="mt-8 space-y-4">
+                  {sideItems.map((item) => (
+                    <li key={item} className="group flex items-center gap-4">
+                      <span className="h-2 w-2 shrink-0 rounded-full bg-[#d5a642]" />
+                      <span className="text-xs font-bold uppercase tracking-[0.14em] text-amber-50/90 transition-colors group-hover:text-[#d5a642]">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+            <div className="lg:col-span-8">{mapStage}</div>
+          </div>
+        ) : (
+          <>
+            <p
+              className={
+                isGreen
+                  ? "mb-5 text-xs font-bold uppercase tracking-[0.36em] text-white/90"
+                  : "mb-5 text-xs font-bold uppercase tracking-[0.36em] text-amber-400"
+              }
+            >
+              {displayedEyebrow}
+            </p>
+            <h2
+              className={
+                isGreen
+                  ? "mb-10 max-w-3xl font-serif text-4xl leading-none text-white sm:text-6xl"
+                  : isLeaf
+                    ? "mb-10 max-w-3xl font-serif text-4xl leading-none text-[#17120e] sm:text-6xl"
+                    : "mb-10 max-w-3xl font-serif text-4xl leading-none text-amber-50 sm:text-6xl"
+              }
+            >
+              {titleWords.join(" ")} <em className={isGreen ? "font-normal text-[#24180f]" : "font-normal text-amber-400"}>{titleLastWord}</em>
+            </h2>
+            {mapStage}
+          </>
+        )}
       </div>
     </section>
   );
