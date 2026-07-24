@@ -148,14 +148,16 @@ export function useGuruvaInteractions() {
     };
     // Some mobile browsers ignore the `muted`/`autoPlay` JSX attributes on first
     // paint and silently block playback, leaving a black frame with an inert
-    // native play affordance. Force the property (not just the attribute) and
-    // retry on the user's first tap if the initial play() is rejected.
+    // native play affordance. Force the property (not just the attribute),
+    // retry once enough of the video is buffered to play, and retry again on
+    // the user's first tap if it's still not playing by then.
     const retryHeroVideoPlay = () => {
       heroVideo?.play().catch(() => {});
     };
     if (heroVideo) {
       heroVideo.muted = true;
       retryHeroVideoPlay();
+      heroVideo.addEventListener("canplay", retryHeroVideoPlay);
       hero?.addEventListener("touchstart", retryHeroVideoPlay, { once: true, passive: true });
       hero?.addEventListener("click", retryHeroVideoPlay, { once: true });
     }
@@ -287,6 +289,7 @@ export function useGuruvaInteractions() {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("resize", onResize);
       heroVideo?.removeEventListener("timeupdate", onVideoTimeUpdate);
+      heroVideo?.removeEventListener("canplay", retryHeroVideoPlay);
       hero?.removeEventListener("touchstart", retryHeroVideoPlay);
       hero?.removeEventListener("click", retryHeroVideoPlay);
       commercialOpenButtons.forEach((button) => button.removeEventListener("click", openCommercialModal));

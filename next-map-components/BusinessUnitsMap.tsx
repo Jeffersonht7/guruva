@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Map, { Marker, Popup, type MapRef } from "react-map-gl/maplibre";
 import styles from "./BusinessUnitsMap.module.css";
 import { MapMarker } from "./MapMarker";
@@ -80,8 +80,13 @@ export function BusinessUnitsMap({
   sideItems,
 }: BusinessUnitsMapProps) {
   const mapRef = useRef<MapRef | null>(null);
+  const popupScrollRef = useRef<HTMLDivElement | null>(null);
   const mapUnits = unidades.length > 0 ? unidades : DEFAULT_UNIDADES;
   const [activeUnit, setActiveUnit] = useState<Unidade | null>(null);
+
+  useEffect(() => {
+    if (popupScrollRef.current) popupScrollRef.current.scrollTop = 0;
+  }, [activeUnit]);
   const [currentZoom, setCurrentZoom] = useState(10.8);
   const [mapError, setMapError] = useState(false);
   const titleWords = title.split(" ");
@@ -245,7 +250,10 @@ export function BusinessUnitsMap({
                   <div className="relative max-h-[220px] w-[260px] max-w-[80vw] overflow-hidden rounded-2xl border border-white/80 bg-white/80 p-4 text-[#173f2c] shadow-[0_24px_70px_rgba(40,30,10,0.28),inset_0_1px_0_rgba(255,255,255,0.92)] backdrop-blur-2xl sm:max-h-[320px] sm:w-[340px] sm:max-w-[82vw]">
                     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.94),rgba(255,255,255,0.58)_48%,rgba(255,248,225,0.72))]" />
                     <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-white/95" />
-                    <div className="relative max-h-[192px] overflow-y-auto pr-1 sm:max-h-[288px]">
+                    <div
+                      ref={popupScrollRef}
+                      className="relative max-h-[192px] overflow-y-auto pr-1 sm:max-h-[288px] [overflow-anchor:none]"
+                    >
                       <div className="mb-3 flex items-center gap-3">
                         {activeUnit.logoSrc ? (
                           <div className="grid h-14 w-20 shrink-0 place-items-center rounded-xl border border-[#e6d8af] bg-white p-2 shadow-sm">

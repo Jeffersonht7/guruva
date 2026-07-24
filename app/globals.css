@@ -2029,30 +2029,26 @@ h2 {
 }
 
 .timeline-journey-controls {
-  display: none;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.timeline-journey-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--vine);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .timeline-journey-controls {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 20px;
-  }
-
-  .timeline-journey-arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    color: var(--vine);
-    font-size: 1.3rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
   .timeline-journey-arrow:hover {
     background: var(--vine);
     color: #fff;

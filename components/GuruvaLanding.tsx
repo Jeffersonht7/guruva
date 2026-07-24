@@ -40,7 +40,16 @@ export function GuruvaLanding() {
 
       <main id="top">
         <section className="hero" aria-label="Guruva Group">
-          <video className="hero-video" src="/assets/guruva-hero.mp4" autoPlay muted loop playsInline />
+          <video
+            className="hero-video"
+            src="/assets/guruva-hero.mp4"
+            poster="/assets/guruva-hero-poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
           <div className="hero-shade"></div>
           <div className="hero-content">
             <h1 className="hero-title" aria-label="Do Vale do São Francisco para o mundo. From the São Francisco Valley to the world.">
