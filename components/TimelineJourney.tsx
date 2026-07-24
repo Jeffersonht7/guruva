@@ -20,6 +20,7 @@ interface WavePoint {
 
 export function TimelineJourney({ items }: TimelineJourneyProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const nodeRefs = useRef<(HTMLElement | null)[]>([]);
   const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
@@ -87,7 +88,21 @@ export function TimelineJourney({ items }: TimelineJourneyProps) {
   };
 
   const scrollByStep = (direction: 1 | -1) => {
-    trackRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
+    const track = trackRef.current;
+    if (!track) return;
+    // Clamp against the real first/last node position instead of the
+    // container's own scrollWidth: the wave SVG overlay can make scrollWidth
+    // report more room than the actual content, letting repeated arrow taps
+    // scroll past the last (or before the first) marker into blank space.
+    const firstNode = nodeRefs.current[0];
+    const lastNode = nodeRefs.current[nodeRefs.current.length - 1];
+    const minScroll = firstNode ? Math.max(0, firstNode.offsetLeft - 24) : 0;
+    const naturalMax = track.scrollWidth - track.clientWidth;
+    const maxScroll = lastNode
+      ? Math.min(naturalMax, Math.max(minScroll, lastNode.offsetLeft + lastNode.offsetWidth - track.clientWidth + 24))
+      : naturalMax;
+    const target = Math.min(Math.max(track.scrollLeft + direction * 320, minScroll), maxScroll);
+    track.scrollTo({ left: target, behavior: "smooth" });
   };
 
   const pathD = wave.points.reduce((acc, point, index) => {
@@ -132,7 +147,13 @@ export function TimelineJourney({ items }: TimelineJourneyProps) {
         )}
 
         {items.map((item, index) => (
-          <article className={`timeline-node ${index % 2 === 0 ? "is-up" : "is-down"}`} key={`${item.year}-${index}`}>
+          <article
+            className={`timeline-node ${index % 2 === 0 ? "is-up" : "is-down"}`}
+            key={`${item.year}-${index}`}
+            ref={(el) => {
+              nodeRefs.current[index] = el;
+            }}
+          >
             <div
               className="timeline-node-photo"
               ref={(el) => {

@@ -251,6 +251,7 @@ export function BusinessUnitsMap({
                     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.94),rgba(255,255,255,0.58)_48%,rgba(255,248,225,0.72))]" />
                     <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-white/95" />
                     <div
+                      key={activeUnit.nome}
                       ref={popupScrollRef}
                       className="relative max-h-[192px] overflow-y-auto pr-1 sm:max-h-[288px] [overflow-anchor:none]"
                     >
